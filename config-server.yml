@@ -1,5 +1,10 @@
-spring:
-  application:
-    name: config-server
 server:
   port: 8888
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/VANIKUMARIGULLA/spring-cloud-config-repo1
+          default-label: main
