@@ -1,7 +1,5 @@
-# user-service.yml
-
 server:
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
@@ -20,5 +18,12 @@ resilience4j:
         slidingWindowSize: 5
         minimumNumberOfCalls: 3
         failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+
+  retry:
+    instances:
+      productService:
+        max-attempts: 2
+        wait-duration: 1s
 
 message: "Hello from Config Server for UserService"
