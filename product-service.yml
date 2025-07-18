@@ -9,14 +9,6 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/productdata
 
-  zipkin:
-    base-url: http://localhost:9412
-    enabled: true
-
-  sleuth:
-    sampler:
-      probability: 1.0  # Trace 100% of requests (for dev); use 0.1 in production
-
 eureka:
   client:
     service-url:
@@ -28,14 +20,5 @@ eureka:
   instance:
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 5
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  tracing:
-    sampling:
-      probability: 1.0
 
 message: "Welcome to Product Service"
