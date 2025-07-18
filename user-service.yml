@@ -12,14 +12,6 @@ spring:
     hibernate:
       ddl-auto: update
 
-  zipkin:
-    base-url: http://localhost:9411
-    enabled: true
-
-  sleuth:
-    sampler:
-      probability: 1.0  # 100% tracing; use 0.1 (10%) in production
-
 eureka:
   client:
     service-url:
@@ -47,14 +39,5 @@ resilience4j:
       productService:
         max-attempts: 2
         wait-duration: 1s
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  tracing:
-    sampling:
-      probability: 1.0
 
 message: "Hello from Config Server for UserService"
