@@ -38,7 +38,7 @@ resilience4j:
 
   retry:
     instances:
-      product-Service:
+      productService:  # ✅ fixed: no hyphen or mismatch
         max-attempts: 2
         wait-duration: 1s
 
