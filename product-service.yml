@@ -20,6 +20,10 @@ spring:
       client:
         enabled: true
 
+  cloud:
+    config:
+      enabled: false  # Disabling Spring Cloud Config Server (you are not using it now)
+
 eureka:
   client:
     service-url:
@@ -44,3 +48,6 @@ management:
     web:
       exposure:
         include: "*"
+  tracing:
+    sampling:
+      probability: 1.0
