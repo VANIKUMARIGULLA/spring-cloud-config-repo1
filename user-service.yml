@@ -3,74 +3,7 @@ server:
 
 spring:
   application:
-    name: user-serviceserver:
-  port: 8080
-
-spring:
-  application:
     name: user-service
-
-  datasource:
-    url: jdbc:mysql://localhost:3306/usersdata
-    username: root
-    password: root
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-
-  zipkin:
-    base-url: http://localhost:9411
-    enabled: true
-
-  cloud:
-    config:
-      enabled: false  # Disable if not using config server
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-    register-with-eureka: true
-    fetch-registry: true
-    lease-renewal-interval-in-seconds: 5
-    lease-expiration-duration-in-seconds: 10
-
-  instance:
-    prefer-ip-address: true
-    lease-renewal-interval-in-seconds: 5
-
-resilience4j:
-  circuitbreaker:
-    instances:
-      productService:
-        registerHealthIndicator: true
-        slidingWindowSize: 5
-        minimumNumberOfCalls: 3
-        failureRateThreshold: 50
-        waitDurationInOpenState: 5s
-
-  retry:
-    instances:
-      productService:
-        max-attempts: 2
-        wait-duration: 1s
-
-logging:
-  pattern:
-    level: "%5p [${spring.application.name},%X{traceId:-},%X{spanId:-}]"
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  tracing:
-    sampling:
-      probability: 1.0
-
-message: "Hello from Config Server for UserService"
-
 
   datasource:
     url: jdbc:mysql://localhost:3306/usersdata
