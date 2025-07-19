@@ -29,7 +29,7 @@ spring:
 
   cloud:
     config:
-      enabled: false  # Disable Config Server
+      enabled: true # Disable Config Server
 
 eureka:
   client:
