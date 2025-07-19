@@ -38,7 +38,7 @@ resilience4j:
 
   retry:
     instances:
-      productService:
+      product-Service:
         max-attempts: 2
         wait-duration: 1s
 
