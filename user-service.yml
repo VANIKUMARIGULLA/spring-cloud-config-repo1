@@ -9,12 +9,10 @@ spring:
     url: jdbc:mysql://localhost:3306/usersdata
     username: root
     password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
 
   zipkin:
     base-url: http://localhost:9411
@@ -42,29 +40,25 @@ resilience4j:
     instances:
       productService:
         registerHealthIndicator: true
-        slidingWindowSize: 3               # Small window to trigger open state faster
-        minimumNumberOfCalls: 3           # Start evaluating after 3 calls
-        failureRateThreshold: 50          # If 2/3 fail => opens circuit
-        waitDurationInOpenState: 10s      # Stay open for 10 seconds
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 3
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
 
   retry:
     instances:
       productService:
-        max-attempts: 2                   # 1 main call + 1 retry
+        max-attempts: 2
         wait-duration: 1s
 
 message: "Hello from Config Server for UserService"
 
 logging:
   pattern:
-    level: "%5p [${spring.application.name},%X{traceId:-},%X{spanId:-}]"
+    level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-
-  tracing:
-    sampling:
-      probability: 1.0
