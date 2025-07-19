@@ -16,13 +16,15 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
+    propagation:
+      type: b3  # Ensure trace context propagation is consistent
     web:
       client:
         enabled: true
 
   cloud:
     config:
-      enabled: false  # Disabling Spring Cloud Config Server (you are not using it now)
+      enabled: false  # Disable Config Server if not used
 
 eureka:
   client:
@@ -41,13 +43,14 @@ message: "Welcome to Product Service"
 
 logging:
   pattern:
-    level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
+    level: "%5p [${spring.application.name},%X{traceId:-},%X{spanId:-}]"
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+
   tracing:
     sampling:
       probability: 1.0
