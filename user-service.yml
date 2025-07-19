@@ -32,7 +32,7 @@ resilience4j:
       productService:
         registerHealthIndicator: true
         slidingWindowSize: 5
-        minimumNumberOfCalls: 3
+        minimumNumberOfCalls: 2
         failureRateThreshold: 50
         waitDurationInOpenState: 2s
 
