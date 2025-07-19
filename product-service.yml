@@ -9,22 +9,9 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017/productdata
 
-  zipkin:
-    base-url: http://localhost:9411/api/v2/spans
-    enabled: true
-
-management:
-  tracing:
-    sampling:
-      probability: 1.0
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-logging:
-  pattern:
-    level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.actuate.autoconfigure.tracing.OpenTelemetryAutoConfiguration
 
 eureka:
   client:
@@ -34,9 +21,23 @@ eureka:
     fetch-registry: true
     lease-renewal-interval-in-seconds: 5
     lease-expiration-duration-in-seconds: 10
-
   instance:
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 5
 
-message: "Hello from Config Server for ProductService"
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+    propagation:
+      type: b3
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{traceId:-},%X{spanId:-}]"
+
+message: "Welcome to Product Service"
