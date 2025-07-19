@@ -13,9 +13,16 @@ spring:
     base-url: http://localhost:9411
     enabled: true
 
+  sleuth:
+    sampler:
+      probability: 1.0
+    web:
+      client:
+        enabled: true
+
   cloud:
     config:
-      enabled: false  # Disabling Spring Cloud Config Server
+      enabled: false  # Disabling Spring Cloud Config Server (you are not using it now)
 
 eureka:
   client:
@@ -34,7 +41,7 @@ message: "Welcome to Product Service"
 
 logging:
   pattern:
-    level: "%5p [${spring.application.name},%X{traceId:-},%X{spanId:-}]"
+    level: "%5p [${spring.application.name},%X{traceId},%X{spanId}]"
 
 management:
   endpoints:
