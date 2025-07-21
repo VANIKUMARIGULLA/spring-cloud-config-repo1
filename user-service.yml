@@ -35,8 +35,8 @@ resilience4j:
     instances:
       productService:  # your Feign client or RestTemplate call name
         registerHealthIndicator: true
-        slidingWindowSize: 2
-        minimumNumberOfCalls: 3
+        slidingWindowSize: 3
+        minimumNumberOfCalls: 2
         failureRateThreshold: 50
         waitDurationInOpenState: 5s
 
