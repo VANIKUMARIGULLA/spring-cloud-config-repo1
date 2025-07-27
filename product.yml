@@ -3,68 +3,28 @@ server:
 
 spring:
   application:
-    name: product
+    name: Product
 
   datasource:
     url: jdbc:mysql://localhost:3306/productsdata
     username: root
     password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    database-platform: org.hibernate.dialect.MySQLDialect
-
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
 
   data:
     mongodb:
       uri: mongodb://localhost:27017/product_mongo
 
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: vanikumari.gulla2@gmail.com
-    password: sbdroggzjfompwkp
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-
-  config:
-    import: optional:configserver:http://localhost:8888
-
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-    fetch-registry: true
     register-with-eureka: true
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
 logging:
-  level:
-    root: INFO
-    com.app.productservice: DEBUG
+  pattern:
+    level: "%5p [${spring.application.name},%X{traceId:-},%X{spanId:-}]"
 
 resilience4j:
-  retry:
-    instances:
-      emailServiceRetry:
-        maxAttempts: 3
-        waitDuration: 2s
-
   circuitbreaker:
     instances:
       emailServiceCircuitBreaker:
@@ -73,6 +33,12 @@ resilience4j:
         minimumNumberOfCalls: 3
         failureRateThreshold: 50
         waitDurationInOpenState: 10s
+
+  retry:
+    instances:
+      emailServiceRetry:
+        max-attempts: 3
+        wait-duration: 2s
 
 springdoc:
   api-docs:
