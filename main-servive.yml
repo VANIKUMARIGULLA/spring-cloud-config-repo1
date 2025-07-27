@@ -1,20 +1,21 @@
 server:
-  port: 8888
+  port: 8761
 
 spring:
   application:
-    name: config-server
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/VANIKUMARIGULLA/Config-Repo
-          default-label: main
-          search-paths:
-            - .
-  profiles:
-    active: native
+    name: main-service
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
 
 logging:
   level:
     root: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
